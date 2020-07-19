@@ -13306,35 +13306,35 @@ div#notebook {
 <div class="prompt input_prompt">In&nbsp;[6]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="sd">&quot;&quot;&quot;&quot;#Testing the API through code from the provided twitter-api.rtf</span>
-<span class="sd">#The </span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">#Testing the API through code from the provided twitter-api.rtf</span>
+<span class="c1">#The </span>
 
 
-<span class="sd">tweet_ids = archive.tweet_id.values</span>
-<span class="sd">len(tweet_ids)</span>
+<span class="n">tweet_ids</span> <span class="o">=</span> <span class="n">archive</span><span class="o">.</span><span class="n">tweet_id</span><span class="o">.</span><span class="n">values</span>
+<span class="nb">len</span><span class="p">(</span><span class="n">tweet_ids</span><span class="p">)</span>
 
-<span class="sd"># Query Twitter&#39;s API for JSON data for each tweet ID in the Twitter archive</span>
-<span class="sd">count = 0</span>
-<span class="sd">fails_dict = {}</span>
-<span class="sd">start = timer()</span>
-<span class="sd"># Save each tweet&#39;s returned JSON as a new line in a .txt file</span>
-<span class="sd">with open(&#39;tweet_json.txt&#39;, &#39;w&#39;) as outfile:</span>
-<span class="sd">    # This loop will likely take 20-30 minutes to run because of Twitter&#39;s rate limit</span>
-<span class="sd">    for tweet_id in tweet_ids:</span>
-<span class="sd">        count += 1</span>
-<span class="sd">        print(str(count) + &quot;: &quot; + str(tweet_id))</span>
-<span class="sd">        try:</span>
-<span class="sd">            tweet = api.get_status(tweet_id, tweet_mode=&#39;extended&#39;)</span>
-<span class="sd">            print(&quot;Success&quot;)</span>
-<span class="sd">            json.dump(tweet._json, outfile)</span>
-<span class="sd">            outfile.write(&#39;\n&#39;)</span>
-<span class="sd">        except tweepy.TweepError as e:</span>
-<span class="sd">            print(&quot;Fail&quot;)</span>
-<span class="sd">            fails_dict[tweet_id] = e</span>
-<span class="sd">            pass</span>
-<span class="sd">end = timer()</span>
-<span class="sd">print(end - start)</span>
-<span class="sd">print(fails_dict)&quot;&quot;&quot;</span>
+<span class="c1"># Query Twitter&#39;s API for JSON data for each tweet ID in the Twitter archive</span>
+<span class="n">count</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="n">fails_dict</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="n">start</span> <span class="o">=</span> <span class="n">timer</span><span class="p">()</span>
+<span class="c1"># Save each tweet&#39;s returned JSON as a new line in a .txt file</span>
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;tweet_json.txt&#39;</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">outfile</span><span class="p">:</span>
+    <span class="c1"># This loop will likely take 20-30 minutes to run because of Twitter&#39;s rate limit</span>
+    <span class="k">for</span> <span class="n">tweet_id</span> <span class="ow">in</span> <span class="n">tweet_ids</span><span class="p">:</span>
+        <span class="n">count</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="nb">print</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">count</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot;: &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">tweet_id</span><span class="p">))</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">tweet</span> <span class="o">=</span> <span class="n">api</span><span class="o">.</span><span class="n">get_status</span><span class="p">(</span><span class="n">tweet_id</span><span class="p">,</span> <span class="n">tweet_mode</span><span class="o">=</span><span class="s1">&#39;extended&#39;</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Success&quot;</span><span class="p">)</span>
+            <span class="n">json</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">tweet</span><span class="o">.</span><span class="n">_json</span><span class="p">,</span> <span class="n">outfile</span><span class="p">)</span>
+            <span class="n">outfile</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+        <span class="k">except</span> <span class="n">tweepy</span><span class="o">.</span><span class="n">TweepError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Fail&quot;</span><span class="p">)</span>
+            <span class="n">fails_dict</span><span class="p">[</span><span class="n">tweet_id</span><span class="p">]</span> <span class="o">=</span> <span class="n">e</span>
+            <span class="k">pass</span>
+<span class="n">end</span> <span class="o">=</span> <span class="n">timer</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">end</span> <span class="o">-</span> <span class="n">start</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">fails_dict</span><span class="p">)</span>
 </pre></div>
 
     </div>
@@ -13347,15 +13347,206 @@ div#notebook {
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[6]:</div>
+    <div class="prompt"></div>
 
 
-
-
-<div class="output_text output_subarea output_execute_result">
-<pre>&#39;&#34;#Testing the API through code from the provided twitter-api.rtf\n#The \n\n\ntweet_ids = archive.tweet_id.values\nlen(tweet_ids)\n\n# Query Twitter\&#39;s API for JSON data for each tweet ID in the Twitter archive\ncount = 0\nfails_dict = {}\nstart = timer()\n# Save each tweet\&#39;s returned JSON as a new line in a .txt file\nwith open(\&#39;tweet_json.txt\&#39;, \&#39;w\&#39;) as outfile:\n    # This loop will likely take 20-30 minutes to run because of Twitter\&#39;s rate limit\n    for tweet_id in tweet_ids:\n        count += 1\n        print(str(count) + &#34;: &#34; + str(tweet_id))\n        try:\n            tweet = api.get_status(tweet_id, tweet_mode=\&#39;extended\&#39;)\n            print(&#34;Success&#34;)\n            json.dump(tweet._json, outfile)\n            outfile.write(\&#39;\n\&#39;)\n        except tweepy.TweepError as e:\n            print(&#34;Fail&#34;)\n            fails_dict[tweet_id] = e\n            pass\nend = timer()\nprint(end - start)\nprint(fails_dict)&#39;</pre>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>1: 892420643555336193
+Fail
+2: 892177421306343426
+Fail
+3: 891815181378084864
+Fail
+4: 891689557279858688
+Fail
+5: 891327558926688256
+Fail
+6: 891087950875897856
+Fail
+7: 890971913173991426
+Fail
+8: 890729181411237888
+Fail
+9: 890609185150312448
+Fail
+10: 890240255349198849
+Fail
+11: 890006608113172480
+Fail
+12: 889880896479866881
+Fail
+13: 889665388333682689
+Fail
+14: 889638837579907072
+Fail
+15: 889531135344209921
+Fail
+16: 889278841981685760
+Fail
+17: 888917238123831296
+Fail
+18: 888804989199671297
+Fail
+19: 888554962724278272
+Fail
+20: 888202515573088257
+Fail
+21: 888078434458587136
+Fail
+22: 887705289381826560
+Fail
+23: 887517139158093824
+Fail
+24: 887473957103951883
+Fail
+25: 887343217045368832
+</pre>
+</div>
 </div>
 
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+<div class="output_subarea output_text output_error">
+<pre>
+<span class="ansi-red-fg">---------------------------------------------------------------------------</span>
+<span class="ansi-red-fg">WantReadError</span>                             Traceback (most recent call last)
+<span class="ansi-green-fg">/opt/conda/lib/python3.6/site-packages/urllib3/contrib/pyopenssl.py</span> in <span class="ansi-cyan-fg">wrap_socket</span><span class="ansi-blue-fg">(self, sock, server_side, do_handshake_on_connect, suppress_ragged_eofs, server_hostname)</span>
+<span class="ansi-green-intense-fg ansi-bold">    440</span>             <span class="ansi-green-fg">try</span><span class="ansi-blue-fg">:</span>
+<span class="ansi-green-fg">--&gt; 441</span><span class="ansi-red-fg">                 </span>cnx<span class="ansi-blue-fg">.</span>do_handshake<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">)</span>
+<span class="ansi-green-intense-fg ansi-bold">    442</span>             <span class="ansi-green-fg">except</span> OpenSSL<span class="ansi-blue-fg">.</span>SSL<span class="ansi-blue-fg">.</span>WantReadError<span class="ansi-blue-fg">:</span>
+
+<span class="ansi-green-fg">/opt/conda/lib/python3.6/site-packages/OpenSSL/SSL.py</span> in <span class="ansi-cyan-fg">do_handshake</span><span class="ansi-blue-fg">(self)</span>
+<span class="ansi-green-intense-fg ansi-bold">   1715</span>         result <span class="ansi-blue-fg">=</span> _lib<span class="ansi-blue-fg">.</span>SSL_do_handshake<span class="ansi-blue-fg">(</span>self<span class="ansi-blue-fg">.</span>_ssl<span class="ansi-blue-fg">)</span>
+<span class="ansi-green-fg">-&gt; 1716</span><span class="ansi-red-fg">         </span>self<span class="ansi-blue-fg">.</span>_raise_ssl_error<span class="ansi-blue-fg">(</span>self<span class="ansi-blue-fg">.</span>_ssl<span class="ansi-blue-fg">,</span> result<span class="ansi-blue-fg">)</span>
+<span class="ansi-green-intense-fg ansi-bold">   1717</span> 
+
+<span class="ansi-green-fg">/opt/conda/lib/python3.6/site-packages/OpenSSL/SSL.py</span> in <span class="ansi-cyan-fg">_raise_ssl_error</span><span class="ansi-blue-fg">(self, ssl, result)</span>
+<span class="ansi-green-intense-fg ansi-bold">   1430</span>         <span class="ansi-green-fg">if</span> error <span class="ansi-blue-fg">==</span> _lib<span class="ansi-blue-fg">.</span>SSL_ERROR_WANT_READ<span class="ansi-blue-fg">:</span>
+<span class="ansi-green-fg">-&gt; 1431</span><span class="ansi-red-fg">             </span><span class="ansi-green-fg">raise</span> WantReadError<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">)</span>
+<span class="ansi-green-intense-fg ansi-bold">   1432</span>         <span class="ansi-green-fg">elif</span> error <span class="ansi-blue-fg">==</span> _lib<span class="ansi-blue-fg">.</span>SSL_ERROR_WANT_WRITE<span class="ansi-blue-fg">:</span>
+
+<span class="ansi-red-fg">WantReadError</span>: 
+
+During handling of the above exception, another exception occurred:
+
+<span class="ansi-red-fg">KeyboardInterrupt</span>                         Traceback (most recent call last)
+<span class="ansi-green-fg">&lt;ipython-input-6-dc708a95c744&gt;</span> in <span class="ansi-cyan-fg">&lt;module&gt;</span><span class="ansi-blue-fg">()</span>
+<span class="ansi-green-intense-fg ansi-bold">     17</span>         print<span class="ansi-blue-fg">(</span>str<span class="ansi-blue-fg">(</span>count<span class="ansi-blue-fg">)</span> <span class="ansi-blue-fg">+</span> <span class="ansi-blue-fg">&#34;: &#34;</span> <span class="ansi-blue-fg">+</span> str<span class="ansi-blue-fg">(</span>tweet_id<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">)</span>
+<span class="ansi-green-intense-fg ansi-bold">     18</span>         <span class="ansi-green-fg">try</span><span class="ansi-blue-fg">:</span>
+<span class="ansi-green-fg">---&gt; 19</span><span class="ansi-red-fg">             </span>tweet <span class="ansi-blue-fg">=</span> api<span class="ansi-blue-fg">.</span>get_status<span class="ansi-blue-fg">(</span>tweet_id<span class="ansi-blue-fg">,</span> tweet_mode<span class="ansi-blue-fg">=</span><span class="ansi-blue-fg">&#39;extended&#39;</span><span class="ansi-blue-fg">)</span>
+<span class="ansi-green-intense-fg ansi-bold">     20</span>             print<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">&#34;Success&#34;</span><span class="ansi-blue-fg">)</span>
+<span class="ansi-green-intense-fg ansi-bold">     21</span>             json<span class="ansi-blue-fg">.</span>dump<span class="ansi-blue-fg">(</span>tweet<span class="ansi-blue-fg">.</span>_json<span class="ansi-blue-fg">,</span> outfile<span class="ansi-blue-fg">)</span>
+
+<span class="ansi-green-fg">/opt/conda/lib/python3.6/site-packages/tweepy/binder.py</span> in <span class="ansi-cyan-fg">_call</span><span class="ansi-blue-fg">(*args, **kwargs)</span>
+<span class="ansi-green-intense-fg ansi-bold">    243</span>             <span class="ansi-green-fg">return</span> method
+<span class="ansi-green-intense-fg ansi-bold">    244</span>         <span class="ansi-green-fg">else</span><span class="ansi-blue-fg">:</span>
+<span class="ansi-green-fg">--&gt; 245</span><span class="ansi-red-fg">             </span><span class="ansi-green-fg">return</span> method<span class="ansi-blue-fg">.</span>execute<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">)</span>
+<span class="ansi-green-intense-fg ansi-bold">    246</span> 
+<span class="ansi-green-intense-fg ansi-bold">    247</span>     <span class="ansi-red-fg"># Set pagination mode</span>
+
+<span class="ansi-green-fg">/opt/conda/lib/python3.6/site-packages/tweepy/binder.py</span> in <span class="ansi-cyan-fg">execute</span><span class="ansi-blue-fg">(self)</span>
+<span class="ansi-green-intense-fg ansi-bold">    185</span>                                                 timeout<span class="ansi-blue-fg">=</span>self<span class="ansi-blue-fg">.</span>api<span class="ansi-blue-fg">.</span>timeout<span class="ansi-blue-fg">,</span>
+<span class="ansi-green-intense-fg ansi-bold">    186</span>                                                 auth<span class="ansi-blue-fg">=</span>auth<span class="ansi-blue-fg">,</span>
+<span class="ansi-green-fg">--&gt; 187</span><span class="ansi-red-fg">                                                 proxies=self.api.proxy)
+</span><span class="ansi-green-intense-fg ansi-bold">    188</span>                 <span class="ansi-green-fg">except</span> Exception <span class="ansi-green-fg">as</span> e<span class="ansi-blue-fg">:</span>
+<span class="ansi-green-intense-fg ansi-bold">    189</span>                     <span class="ansi-green-fg">raise</span> TweepError<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">&#39;Failed to send request: %s&#39;</span> <span class="ansi-blue-fg">%</span> e<span class="ansi-blue-fg">)</span>
+
+<span class="ansi-green-fg">/opt/conda/lib/python3.6/site-packages/requests/sessions.py</span> in <span class="ansi-cyan-fg">request</span><span class="ansi-blue-fg">(self, method, url, params, data, headers, cookies, files, auth, timeout, allow_redirects, proxies, hooks, stream, verify, cert, json)</span>
+<span class="ansi-green-intense-fg ansi-bold">    506</span>         }
+<span class="ansi-green-intense-fg ansi-bold">    507</span>         send_kwargs<span class="ansi-blue-fg">.</span>update<span class="ansi-blue-fg">(</span>settings<span class="ansi-blue-fg">)</span>
+<span class="ansi-green-fg">--&gt; 508</span><span class="ansi-red-fg">         </span>resp <span class="ansi-blue-fg">=</span> self<span class="ansi-blue-fg">.</span>send<span class="ansi-blue-fg">(</span>prep<span class="ansi-blue-fg">,</span> <span class="ansi-blue-fg">**</span>send_kwargs<span class="ansi-blue-fg">)</span>
+<span class="ansi-green-intense-fg ansi-bold">    509</span> 
+<span class="ansi-green-intense-fg ansi-bold">    510</span>         <span class="ansi-green-fg">return</span> resp
+
+<span class="ansi-green-fg">/opt/conda/lib/python3.6/site-packages/requests/sessions.py</span> in <span class="ansi-cyan-fg">send</span><span class="ansi-blue-fg">(self, request, **kwargs)</span>
+<span class="ansi-green-intense-fg ansi-bold">    616</span> 
+<span class="ansi-green-intense-fg ansi-bold">    617</span>         <span class="ansi-red-fg"># Send the request</span>
+<span class="ansi-green-fg">--&gt; 618</span><span class="ansi-red-fg">         </span>r <span class="ansi-blue-fg">=</span> adapter<span class="ansi-blue-fg">.</span>send<span class="ansi-blue-fg">(</span>request<span class="ansi-blue-fg">,</span> <span class="ansi-blue-fg">**</span>kwargs<span class="ansi-blue-fg">)</span>
+<span class="ansi-green-intense-fg ansi-bold">    619</span> 
+<span class="ansi-green-intense-fg ansi-bold">    620</span>         <span class="ansi-red-fg"># Total elapsed time of the request (approximately)</span>
+
+<span class="ansi-green-fg">/opt/conda/lib/python3.6/site-packages/requests/adapters.py</span> in <span class="ansi-cyan-fg">send</span><span class="ansi-blue-fg">(self, request, stream, timeout, verify, cert, proxies)</span>
+<span class="ansi-green-intense-fg ansi-bold">    438</span>                     decode_content<span class="ansi-blue-fg">=</span><span class="ansi-green-fg">False</span><span class="ansi-blue-fg">,</span>
+<span class="ansi-green-intense-fg ansi-bold">    439</span>                     retries<span class="ansi-blue-fg">=</span>self<span class="ansi-blue-fg">.</span>max_retries<span class="ansi-blue-fg">,</span>
+<span class="ansi-green-fg">--&gt; 440</span><span class="ansi-red-fg">                     </span>timeout<span class="ansi-blue-fg">=</span>timeout
+<span class="ansi-green-intense-fg ansi-bold">    441</span>                 )
+<span class="ansi-green-intense-fg ansi-bold">    442</span> 
+
+<span class="ansi-green-fg">/opt/conda/lib/python3.6/site-packages/urllib3/connectionpool.py</span> in <span class="ansi-cyan-fg">urlopen</span><span class="ansi-blue-fg">(self, method, url, body, headers, retries, redirect, assert_same_host, timeout, pool_timeout, release_conn, chunked, body_pos, **response_kw)</span>
+<span class="ansi-green-intense-fg ansi-bold">    599</span>                                                   timeout<span class="ansi-blue-fg">=</span>timeout_obj<span class="ansi-blue-fg">,</span>
+<span class="ansi-green-intense-fg ansi-bold">    600</span>                                                   body<span class="ansi-blue-fg">=</span>body<span class="ansi-blue-fg">,</span> headers<span class="ansi-blue-fg">=</span>headers<span class="ansi-blue-fg">,</span>
+<span class="ansi-green-fg">--&gt; 601</span><span class="ansi-red-fg">                                                   chunked=chunked)
+</span><span class="ansi-green-intense-fg ansi-bold">    602</span> 
+<span class="ansi-green-intense-fg ansi-bold">    603</span>             <span class="ansi-red-fg"># If we&#39;re going to release the connection in ``finally:``, then</span>
+
+<span class="ansi-green-fg">/opt/conda/lib/python3.6/site-packages/urllib3/connectionpool.py</span> in <span class="ansi-cyan-fg">_make_request</span><span class="ansi-blue-fg">(self, conn, method, url, timeout, chunked, **httplib_request_kw)</span>
+<span class="ansi-green-intense-fg ansi-bold">    344</span>         <span class="ansi-red-fg"># Trigger any extra validation we need to do.</span>
+<span class="ansi-green-intense-fg ansi-bold">    345</span>         <span class="ansi-green-fg">try</span><span class="ansi-blue-fg">:</span>
+<span class="ansi-green-fg">--&gt; 346</span><span class="ansi-red-fg">             </span>self<span class="ansi-blue-fg">.</span>_validate_conn<span class="ansi-blue-fg">(</span>conn<span class="ansi-blue-fg">)</span>
+<span class="ansi-green-intense-fg ansi-bold">    347</span>         <span class="ansi-green-fg">except</span> <span class="ansi-blue-fg">(</span>SocketTimeout<span class="ansi-blue-fg">,</span> BaseSSLError<span class="ansi-blue-fg">)</span> <span class="ansi-green-fg">as</span> e<span class="ansi-blue-fg">:</span>
+<span class="ansi-green-intense-fg ansi-bold">    348</span>             <span class="ansi-red-fg"># Py2 raises this as a BaseSSLError, Py3 raises it as socket timeout.</span>
+
+<span class="ansi-green-fg">/opt/conda/lib/python3.6/site-packages/urllib3/connectionpool.py</span> in <span class="ansi-cyan-fg">_validate_conn</span><span class="ansi-blue-fg">(self, conn)</span>
+<span class="ansi-green-intense-fg ansi-bold">    848</span>         <span class="ansi-red-fg"># Force connect early to allow us to validate the connection.</span>
+<span class="ansi-green-intense-fg ansi-bold">    849</span>         <span class="ansi-green-fg">if</span> <span class="ansi-green-fg">not</span> getattr<span class="ansi-blue-fg">(</span>conn<span class="ansi-blue-fg">,</span> <span class="ansi-blue-fg">&#39;sock&#39;</span><span class="ansi-blue-fg">,</span> <span class="ansi-green-fg">None</span><span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">:</span>  <span class="ansi-red-fg"># AppEngine might not have  `.sock`</span>
+<span class="ansi-green-fg">--&gt; 850</span><span class="ansi-red-fg">             </span>conn<span class="ansi-blue-fg">.</span>connect<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">)</span>
+<span class="ansi-green-intense-fg ansi-bold">    851</span> 
+<span class="ansi-green-intense-fg ansi-bold">    852</span>         <span class="ansi-green-fg">if</span> <span class="ansi-green-fg">not</span> conn<span class="ansi-blue-fg">.</span>is_verified<span class="ansi-blue-fg">:</span>
+
+<span class="ansi-green-fg">/opt/conda/lib/python3.6/site-packages/urllib3/connection.py</span> in <span class="ansi-cyan-fg">connect</span><span class="ansi-blue-fg">(self)</span>
+<span class="ansi-green-intense-fg ansi-bold">    324</span>             ca_cert_dir<span class="ansi-blue-fg">=</span>self<span class="ansi-blue-fg">.</span>ca_cert_dir<span class="ansi-blue-fg">,</span>
+<span class="ansi-green-intense-fg ansi-bold">    325</span>             server_hostname<span class="ansi-blue-fg">=</span>hostname<span class="ansi-blue-fg">,</span>
+<span class="ansi-green-fg">--&gt; 326</span><span class="ansi-red-fg">             ssl_context=context)
+</span><span class="ansi-green-intense-fg ansi-bold">    327</span> 
+<span class="ansi-green-intense-fg ansi-bold">    328</span>         <span class="ansi-green-fg">if</span> self<span class="ansi-blue-fg">.</span>assert_fingerprint<span class="ansi-blue-fg">:</span>
+
+<span class="ansi-green-fg">/opt/conda/lib/python3.6/site-packages/urllib3/util/ssl_.py</span> in <span class="ansi-cyan-fg">ssl_wrap_socket</span><span class="ansi-blue-fg">(sock, keyfile, certfile, cert_reqs, ca_certs, server_hostname, ssl_version, ciphers, ssl_context, ca_cert_dir)</span>
+<span class="ansi-green-intense-fg ansi-bold">    327</span>         context<span class="ansi-blue-fg">.</span>load_cert_chain<span class="ansi-blue-fg">(</span>certfile<span class="ansi-blue-fg">,</span> keyfile<span class="ansi-blue-fg">)</span>
+<span class="ansi-green-intense-fg ansi-bold">    328</span>     <span class="ansi-green-fg">if</span> HAS_SNI<span class="ansi-blue-fg">:</span>  <span class="ansi-red-fg"># Platform-specific: OpenSSL with enabled SNI</span>
+<span class="ansi-green-fg">--&gt; 329</span><span class="ansi-red-fg">         </span><span class="ansi-green-fg">return</span> context<span class="ansi-blue-fg">.</span>wrap_socket<span class="ansi-blue-fg">(</span>sock<span class="ansi-blue-fg">,</span> server_hostname<span class="ansi-blue-fg">=</span>server_hostname<span class="ansi-blue-fg">)</span>
+<span class="ansi-green-intense-fg ansi-bold">    330</span> 
+<span class="ansi-green-intense-fg ansi-bold">    331</span>     warnings.warn(
+
+<span class="ansi-green-fg">/opt/conda/lib/python3.6/site-packages/urllib3/contrib/pyopenssl.py</span> in <span class="ansi-cyan-fg">wrap_socket</span><span class="ansi-blue-fg">(self, sock, server_side, do_handshake_on_connect, suppress_ragged_eofs, server_hostname)</span>
+<span class="ansi-green-intense-fg ansi-bold">    441</span>                 cnx<span class="ansi-blue-fg">.</span>do_handshake<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">)</span>
+<span class="ansi-green-intense-fg ansi-bold">    442</span>             <span class="ansi-green-fg">except</span> OpenSSL<span class="ansi-blue-fg">.</span>SSL<span class="ansi-blue-fg">.</span>WantReadError<span class="ansi-blue-fg">:</span>
+<span class="ansi-green-fg">--&gt; 443</span><span class="ansi-red-fg">                 </span>rd <span class="ansi-blue-fg">=</span> util<span class="ansi-blue-fg">.</span>wait_for_read<span class="ansi-blue-fg">(</span>sock<span class="ansi-blue-fg">,</span> sock<span class="ansi-blue-fg">.</span>gettimeout<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">)</span>
+<span class="ansi-green-intense-fg ansi-bold">    444</span>                 <span class="ansi-green-fg">if</span> <span class="ansi-green-fg">not</span> rd<span class="ansi-blue-fg">:</span>
+<span class="ansi-green-intense-fg ansi-bold">    445</span>                     <span class="ansi-green-fg">raise</span> timeout<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">&#39;select timed out&#39;</span><span class="ansi-blue-fg">)</span>
+
+<span class="ansi-green-fg">/opt/conda/lib/python3.6/site-packages/urllib3/util/wait.py</span> in <span class="ansi-cyan-fg">wait_for_read</span><span class="ansi-blue-fg">(socks, timeout)</span>
+<span class="ansi-green-intense-fg ansi-bold">     31</span>     <span class="ansi-green-fg">or</span> optionally a single socket <span class="ansi-green-fg">if</span> passed <span class="ansi-green-fg">in</span><span class="ansi-blue-fg">.</span> Returns a list of
+<span class="ansi-green-intense-fg ansi-bold">     32</span>     sockets that can be read from immediately. &#34;&#34;&#34;
+<span class="ansi-green-fg">---&gt; 33</span><span class="ansi-red-fg">     </span><span class="ansi-green-fg">return</span> _wait_for_io_events<span class="ansi-blue-fg">(</span>socks<span class="ansi-blue-fg">,</span> EVENT_READ<span class="ansi-blue-fg">,</span> timeout<span class="ansi-blue-fg">)</span>
+<span class="ansi-green-intense-fg ansi-bold">     34</span> 
+<span class="ansi-green-intense-fg ansi-bold">     35</span> 
+
+<span class="ansi-green-fg">/opt/conda/lib/python3.6/site-packages/urllib3/util/wait.py</span> in <span class="ansi-cyan-fg">_wait_for_io_events</span><span class="ansi-blue-fg">(socks, events, timeout)</span>
+<span class="ansi-green-intense-fg ansi-bold">     24</span>             selector<span class="ansi-blue-fg">.</span>register<span class="ansi-blue-fg">(</span>sock<span class="ansi-blue-fg">,</span> events<span class="ansi-blue-fg">)</span>
+<span class="ansi-green-intense-fg ansi-bold">     25</span>         return [key[0].fileobj for key in
+<span class="ansi-green-fg">---&gt; 26</span><span class="ansi-red-fg">                 selector.select(timeout) if key[1] &amp; events]
+</span><span class="ansi-green-intense-fg ansi-bold">     27</span> 
+<span class="ansi-green-intense-fg ansi-bold">     28</span> 
+
+<span class="ansi-green-fg">/opt/conda/lib/python3.6/site-packages/urllib3/util/selectors.py</span> in <span class="ansi-cyan-fg">select</span><span class="ansi-blue-fg">(self, timeout)</span>
+<span class="ansi-green-intense-fg ansi-bold">    436</span>             fd_events = _syscall_wrapper(self._epoll.poll, True,
+<span class="ansi-green-intense-fg ansi-bold">    437</span>                                          timeout<span class="ansi-blue-fg">=</span>timeout<span class="ansi-blue-fg">,</span>
+<span class="ansi-green-fg">--&gt; 438</span><span class="ansi-red-fg">                                          maxevents=max_events)
+</span><span class="ansi-green-intense-fg ansi-bold">    439</span>             <span class="ansi-green-fg">for</span> fd<span class="ansi-blue-fg">,</span> event_mask <span class="ansi-green-fg">in</span> fd_events<span class="ansi-blue-fg">:</span>
+<span class="ansi-green-intense-fg ansi-bold">    440</span>                 events <span class="ansi-blue-fg">=</span> <span class="ansi-cyan-fg">0</span>
+
+<span class="ansi-green-fg">/opt/conda/lib/python3.6/site-packages/urllib3/util/selectors.py</span> in <span class="ansi-cyan-fg">_syscall_wrapper</span><span class="ansi-blue-fg">(func, _, *args, **kwargs)</span>
+<span class="ansi-green-intense-fg ansi-bold">     62</span>         and recalculate their timeouts. &#34;&#34;&#34;
+<span class="ansi-green-intense-fg ansi-bold">     63</span>         <span class="ansi-green-fg">try</span><span class="ansi-blue-fg">:</span>
+<span class="ansi-green-fg">---&gt; 64</span><span class="ansi-red-fg">             </span><span class="ansi-green-fg">return</span> func<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">*</span>args<span class="ansi-blue-fg">,</span> <span class="ansi-blue-fg">**</span>kwargs<span class="ansi-blue-fg">)</span>
+<span class="ansi-green-intense-fg ansi-bold">     65</span>         <span class="ansi-green-fg">except</span> <span class="ansi-blue-fg">(</span>OSError<span class="ansi-blue-fg">,</span> IOError<span class="ansi-blue-fg">,</span> select<span class="ansi-blue-fg">.</span>error<span class="ansi-blue-fg">)</span> <span class="ansi-green-fg">as</span> e<span class="ansi-blue-fg">:</span>
+<span class="ansi-green-intense-fg ansi-bold">     66</span>             errcode <span class="ansi-blue-fg">=</span> <span class="ansi-green-fg">None</span>
+
+<span class="ansi-red-fg">KeyboardInterrupt</span>: </pre>
+</div>
 </div>
 
 </div>
@@ -13640,67 +13831,67 @@ memory usage: 313.0+ KB
 
 
 <div class="output_text output_subarea output_execute_result">
-<pre>None            745
-a                55
-Charlie          12
-Lucy             11
-Cooper           11
-Oliver           11
-Penny            10
-Tucker           10
-Lola             10
-Winston           9
-Bo                9
-Sadie             8
-the               8
-Buddy             7
-Toby              7
-Daisy             7
-Bailey            7
-an                7
-Bella             6
-Jack              6
-Jax               6
-Rusty             6
-Koda              6
-Dave              6
-Oscar             6
-Scout             6
-Stanley           6
-Leo               6
-Milo              6
-Finn              5
-               ... 
-Carper            1
-Bobb              1
-Darla             1
-Terrenth          1
-Brutus            1
-Carbon            1
-Shnuggles         1
-Brat              1
-Cannon            1
-Marvin            1
-Ralphus           1
-Maisey            1
-Snicku            1
-Coleman           1
-Cilantro          1
-Philippe          1
-Jessifer          1
-Henry             1
-Anthony           1
-Fynn              1
-Brudge            1
-Rueben            1
-Cleopatricia      1
-Georgie           1
-Mason             1
-Jo                1
-infuriating       1
-Donny             1
-all               1
-Danny             1
+<pre>None        745
+a            55
+Charlie      12
+Cooper       11
+Oliver       11
+Lucy         11
+Lola         10
+Tucker       10
+Penny        10
+Bo            9
+Winston       9
+the           8
+Sadie         8
+Toby          7
+an            7
+Daisy         7
+Bailey        7
+Buddy         7
+Koda          6
+Leo           6
+Jax           6
+Scout         6
+Milo          6
+Bella         6
+Dave          6
+Rusty         6
+Stanley       6
+Jack          6
+Oscar         6
+Sammy         5
+           ... 
+Tiger         1
+Ziva          1
+General       1
+Goose         1
+Jazzy         1
+Kenzie        1
+Monster       1
+Heinrich      1
+Bloo          1
+Griswold      1
+Rambo         1
+BeBe          1
+Rascal        1
+Charl         1
+Tebow         1
+Tommy         1
+Randall       1
+Remus         1
+Ebby          1
+Nico          1
+Maxwell       1
+Halo          1
+Damon         1
+Jay           1
+Eevee         1
+Rontu         1
+Georgie       1
+Carll         1
+Kingsley      1
+Livvie        1
 Name: name, Length: 957, dtype: int64</pre>
 </div>
 
@@ -16646,7 +16837,7 @@ Looking at the data as a whole, there are some questions that could be asked:</p
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Apparently there is no strong relationship between the dog rating and retweet count. In fact the outliers with big rating appear to gather fewer retweets.</p>
+<p>The graph shows that for ratings up to 1.5, the higher the dog rating the more retweets it gets.</p>
 
 </div>
 </div>
